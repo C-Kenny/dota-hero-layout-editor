@@ -87,10 +87,10 @@ ko.extenders.numeric = function(target, precision) {
         this.selected = ko.observable(false);
         this.selected.subscribe(function(newValue) {
             if (newValue) {
-                $(self.$imgDraggable).addClass("ui-state-highlight");
+                self.$imgDraggable.addClass("ui-state-highlight");
             }
             else {
-                $(self.$imgDraggable).removeClass("ui-state-highlight");
+                self.$imgDraggable.removeClass("ui-state-highlight");
             }
             self.collection.updateSelected();
         });
@@ -117,11 +117,11 @@ ko.extenders.numeric = function(target, precision) {
             //console.log('snapped', newValue);
             if (newValue) {
                 self.setGrid([self.collection.gridWidth(), self.collection.gridHeight()]);
-                $(self.$img).addClass("card-snapped");
+                self.$img.addClass("card-snapped");
             }
             else {
                 self.setGrid(false);
-                $(self.$img).removeClass("card-snapped");
+                self.$img.removeClass("card-snapped");
             }
             //console.log(self.$imgDraggable.draggable("option", "grid"));
         });
