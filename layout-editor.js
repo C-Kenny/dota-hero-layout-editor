@@ -109,12 +109,9 @@ ko.extenders.numeric = function(target, precision) {
         this.zpos.subscribe(function(newValue) {
             self.$imgDraggable.css("zIndex", newValue);
         });
-        //var src = 'http://placehold.it/68x68';
-        //var src = "http://cdn.dota2.com/apps/dota2/images/heroes/" + name.replace('npc_dota_hero_', '') + "_vert.jpg"
         var src = "/media/images/heroes/selection/npc_dota_hero_" + this.name + ".png"
         this.snapped = ko.observable(false);
         this.snapped.subscribe(function(newValue) {
-            //console.log('snapped', newValue);
             if (newValue) {
                 self.setGrid([self.collection.gridWidth(), self.collection.gridHeight()]);
                 self.$img.addClass("card-snapped");
@@ -123,7 +120,6 @@ ko.extenders.numeric = function(target, precision) {
                 self.setGrid(false);
                 self.$img.removeClass("card-snapped");
             }
-            //console.log(self.$imgDraggable.draggable("option", "grid"));
         });
         
         this.$imgDraggable = $('<div>')
@@ -136,11 +132,6 @@ ko.extenders.numeric = function(target, precision) {
                                         containment: '#container',
                                         grid: false,
                                         start: function( event, ui ) {
-                                            //self.snapToGrid(this, ui);
-                                            /*if (!event.shiftKey && !event.ctrlKey) {
-                                                self.collection.selectAll(false);
-                                            }*/
-                                            //console.log('drag start', $(this).draggable('option', 'grid'));
                                             self.collection.state = 'dragging';
                                             self.selected(true);
                                             self.dragStartPos.top = ui.position.top;
@@ -158,7 +149,6 @@ ko.extenders.numeric = function(target, precision) {
                                             self.collection.historyCount(self.collection.history.length);
                                         },
                                         drag: function(event, ui) {
-                                            //self.snapToGrid(this, ui);
                                             $('.ui-state-highlight').each(function(index) {
                                                 if (this != self.$imgDraggable[0]) {
                                                     $(this).css({
@@ -169,7 +159,6 @@ ko.extenders.numeric = function(target, precision) {
                                             });
                                         },
                                         stop: function(event, ui) {
-                                            //self.snapToGrid(this, ui);
                                             self.disableSetXY = true;
                                             self.x($(this).position().left - self.collection.$grid.offset().left);
                                             self.y($(this).position().top - self.collection.$grid.offset().top);
@@ -179,7 +168,6 @@ ko.extenders.numeric = function(target, precision) {
                                                 if (this != self.$imgDraggable[0]) {
                                                     this.card.x($(this).position().left - this.card.collection.$grid.offset().left);
                                                     this.card.y($(this).position().top - this.card.collection.$grid.offset().top);
-                                                    //this.card.snapToGrid(this, ui);
                                                 }
                                             });
                                             if (self.collection.state == 'dragging') self.collection.state = null;
@@ -252,41 +240,6 @@ ko.extenders.numeric = function(target, precision) {
         
         this.disableSetXY = false;
         this.setXY();
-        
-        /*this.gridChanged = ko.computed(function () {
-            console.log('grid changed');
-            self.collection.gridWidth();
-            self.collection.gridHeight();
-            if (self.snapped()) self.snap();
-        });*/
-        /*
-        this.snapToGrid = function (element, ui) {
-           if ((ui.position.left - self.collection.$grid.offset().left) % self.collection.gridWidth() < self.collection.gridWidth() / 2) {
-                $(element).css({
-                    left: ui.position.left - (ui.position.left - self.collection.$grid.offset().left) % self.collection.gridWidth()
-                });
-                ui.position.left -= (ui.position.left - self.collection.$grid.offset().left) % self.collection.gridWidth()
-            }
-            else {
-                $(element).css({
-                    left: ui.position.left + self.collection.gridWidth() - ((ui.position.left - self.collection.$grid.offset().left) % self.collection.gridWidth())
-                });
-                ui.position.left += self.collection.gridWidth() - ((ui.position.left - self.collection.$grid.offset().left) % self.collection.gridWidth())
-            }
-            if ((ui.position.top - self.collection.$grid.offset().top) % self.collection.gridHeight() < self.collection.gridHeight() / 2) {
-                $(element).css({
-                    top: ui.position.top - (ui.position.top - self.collection.$grid.offset().top) % self.collection.gridHeight()
-                });
-                ui.position.top -= (ui.position.top - self.collection.$grid.offset().top) % self.collection.gridHeight()
-            }
-            else {
-                $(element).css({
-                    top: ui.position.top + self.collection.gridHeight() - ((ui.position.top - self.collection.$grid.offset().top) % self.collection.gridHeight())
-                });
-                ui.position.top += self.collection.gridHeight() - ((ui.position.top - self.collection.$grid.offset().top) % self.collection.gridHeight())
-            }
-        }
-        */
     }
     
     Card.prototype.getState = function () {
@@ -376,22 +329,6 @@ ko.extenders.numeric = function(target, precision) {
         this.setXY();
     }
 
-    /*
-    Card.prototype.snapToGrid = function (gridWidth, gridHeight) {
-        if (this.x % gridWidth < gridWidth / 2) {
-            this.x -= this.x % gridWidth;
-        }
-        else {
-            this.x += gridWidth - (this.x % gridWidth);
-        }
-        if (this.y % gridHeight < gridHeight / 2) {
-            this.y -= this.y % gridHeight;
-        }
-        else {
-            this.y += gridHeight - (this.y % gridHeight);
-        }
-    }*/
-    
     function CardCollection(width, height, layoutWidth, layoutHeight, gridWidth, gridHeight, cardWidth, cardHeight) {
         var self = this;
         this.cardWidth = ko.observable(cardWidth);
@@ -417,19 +354,12 @@ ko.extenders.numeric = function(target, precision) {
             self.changeAspectRatio.apply(self, aspectRatios[newValue]);
         });
         $(document).keydown(function (event) {
-            //console.log(event.which, event.ctrlKey);
             if ($(".controls input[type=text]").is(":focus")) return;
             if (event.ctrlKey) {
                 switch (event.which) {
                     case 65: // CTRL + A
                         self.selectAll(true);
                     break;
-                    /*case 90: // CTRL + Z
-                        self.undo();
-                    break;
-                    case 89: // CTRL + Y
-                        self.redo();
-                    break;*/
                 }
             }
             else {
@@ -528,11 +458,6 @@ ko.extenders.numeric = function(target, precision) {
             }
         });
         this.gridChanged = ko.computed(function () {
-            //console.log('grid changed');
-            //self.setGrid([self.gridWidth(), self.gridHeight()]);
-            /*self.snapped().map(function (card) {
-                card.snap();
-            });*/
         });
         this.gridChangeEmitter = ko.observable(0);
         this.gridListener = ko.computed(function () {
@@ -542,11 +467,9 @@ ko.extenders.numeric = function(target, precision) {
         });
         this.gridChangeEmitter.subscribe(function (newValue) {
             if (self.modifyingState) return;
-            //console.log('gridChangeEmitter', newValue);
             var action = [];
             action.gridWidth = self.gridWidth();
             action.gridHeight = self.gridHeight();
-            //self.setGrid([self.gridWidth(), self.gridHeight()]);
             self.snapped().map(function (card) {
                 action.push(card.getState());
                 card.setGrid([self.gridWidth(), self.gridHeight()]);
@@ -594,7 +517,6 @@ ko.extenders.numeric = function(target, precision) {
             self.updateSelected();
             if (self.state = 'selecting') self.state = null;
         });
-        //self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
     }
     CardCollection.prototype = Object.create(Array.prototype);
     CardCollection.prototype.constructor = CardCollection;
@@ -670,7 +592,6 @@ ko.extenders.numeric = function(target, precision) {
     CardCollection.prototype.setGrid = function (value) {
         this.snapped().map(function (card) {
             card.setGrid(value);
-            //card.snap();
         });
     }
     
@@ -681,7 +602,6 @@ ko.extenders.numeric = function(target, precision) {
             this.swap(false);
             var states = this.history.pop();
             var present = [];
-            //console.log(states);
             present.gridWidth = this.gridWidth();
             present.gridHeight = this.gridHeight();
             if (states.gridWidth != undefined) this.gridWidth(states.gridWidth);
@@ -704,7 +624,6 @@ ko.extenders.numeric = function(target, precision) {
             this.swap(false);
             var states = this.future.pop();
             var present = [];
-            //console.log(states);
             present.gridWidth = this.gridWidth();
             present.gridHeight = this.gridHeight();
             if (states.gridWidth != undefined) this.gridWidth(states.gridWidth);
@@ -786,7 +705,6 @@ ko.extenders.numeric = function(target, precision) {
         this.selectedCount(value ? this.length : 0);
         this.selectedCard(null);
         this.disableUpdateSelected = false;
-        //this.updateSelected();
     }
     
     CardCollection.prototype.selection = function () {
@@ -834,18 +752,11 @@ ko.extenders.numeric = function(target, precision) {
     
     CardCollection.prototype.setSelectedProperty = function (prop, value) {
         var action = [];
-        //var self = this;
         this.selection().map(function (card) {
-            //if (self.state == null) action.push(card.getState());
             card[prop](value);
             if (prop == 'x' || prop == 'y') card.setXY();
             if (prop == 'scale') card.resize();
         });
-        /*if (this.state == null) {
-            console.log('saving history');
-            this.future.length = 0;
-            this.history.push(action);
-        }*/
     }
     
     CardCollection.prototype.draggable = function (value) {
@@ -887,11 +798,6 @@ ko.extenders.numeric = function(target, precision) {
                     HeroIDs.splice(HeroIDs.indexOf(HeroID.toString()), 1);
                 }
             }
-            /*else if (depth == 1) {
-                var id = parseFloat(data[i].replace(/"/g, ''));
-                if (!isNaN(id)) {
-                }
-            }*/
             else if (depth == 2) {
                 if (data[i].indexOf('"HeroID"') > -1) {
                     HeroID = parseFloat(data[i].replace('HeroID', '').replace(/"/g, ''));
@@ -1014,7 +920,6 @@ ko.extenders.numeric = function(target, precision) {
             data: { 'data': self.toLayoutVMF() },
             dataType: "json",
             success: function(data) {
-                //console.log(data);
                 if (data.error) {
                     alert("Save request failed.");
                 }
@@ -1066,12 +971,6 @@ ko.extenders.numeric = function(target, precision) {
             var r = new FileReader();
             r.onload = function(e) {
                 var contents = e.target.result;
-                /*alert( "Got the file.n" 
-                +"name: " + f.name + "n"
-                +"type: " + f.type + "n"
-                +"size: " + f.size + " bytesn"
-                + "starts with: " + contents.substr(1, contents.indexOf("n"))
-                );*/
                 document.getElementById("upload-file").value = f.name;
                 callback(contents);
             }
@@ -1207,7 +1106,6 @@ ko.extenders.numeric = function(target, precision) {
         var saveId = getParameterByName('id');
         if (saveId) {
             $.get('save/' + saveId + '.txt', function (data) {
-                //console.log(data);
                 cards.parseVMF(data);
                 if (getParameterByName('canvas_only')) {
                     $('.controls-wrapper').remove();
