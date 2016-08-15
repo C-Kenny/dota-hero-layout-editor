@@ -457,8 +457,6 @@ ko.extenders.numeric = function(target, precision) {
                 self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
             }
         });
-        this.gridChanged = ko.computed(function () {
-        });
         this.gridChangeEmitter = ko.observable(0);
         this.gridListener = ko.computed(function () {
             self.gridWidth();
