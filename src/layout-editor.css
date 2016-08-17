@@ -6,7 +6,7 @@ body {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    background-image: url('background_16x9.jpg');
+    background-image: url('img/background_16x9.jpg');
     margin: 0;
     padding: 0;
     background-repeat: no-repeat;

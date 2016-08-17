@@ -1052,7 +1052,7 @@ ko.extenders.numeric = function(target, precision) {
             owner: this
         });
         self.backgroundImage = ko.computed(function () {
-            return 'url(background_' + cards.aspectRatio() + '.jpg)'
+            return 'url(img/background_' + cards.aspectRatio() + '.jpg)'
         });
         self.marginLeft = ko.computed(function () {
             return aspectRatios[cards.aspectRatio()][8] + 'px';
@@ -1067,7 +1067,7 @@ ko.extenders.numeric = function(target, precision) {
         self.downloadLink = cards.downloadLink;
         self.shareId = cards.shareId;
         self.shareLink = ko.computed(function () {
-            return 'http://dev.devilesk.com/dota2/apps/layout-editor/?id=' + self.shareId();
+            return [location.protocol, '//', location.host, location.pathname].join('') + '?id=' + self.shareId();
         });
         self.shareLayout = function () {
             if (cards.shareId != '') {

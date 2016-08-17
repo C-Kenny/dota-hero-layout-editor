@@ -1,0 +1,30 @@
+{
+  "name": "dota-hero-layout-editor",
+  "version": "1.0.0",
+  "description": "Dota 2 Hero Layout Editor",
+  "main": "layout-editor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devilesk/dota-hero-layout-editor.git"
+  },
+  "author": "devilesk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devilesk/dota-hero-layout-editor/issues"
+  },
+  "homepage": "https://github.com/devilesk/dota-hero-layout-editor#readme",
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-preprocess": "^2.0.0",
+    "gulp-sequence": "^0.4.5",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1"
+  }
+}
