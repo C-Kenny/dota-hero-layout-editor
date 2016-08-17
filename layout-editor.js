@@ -1094,7 +1094,6 @@ ko.extenders.numeric = function(target, precision) {
     
     $.getJSON('/media/js/herodata.json', function (data) {
         for (key in data) {
-            if (key == 'npc_dota_hero_abyssal_underlord') continue;
             var h = data[key];
             herodata[h.HeroID] = h;
             cards.add(key, h.displayname, h.HeroID);
