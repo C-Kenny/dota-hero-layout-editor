@@ -36,10 +36,10 @@ gulp.task('copy-files', function () {
     return gulp
         .src([
             'src/*.txt',
-            'save.php',
-            'index.html'
+            'src/save.php',
+            'src/index.html'
         ])
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', 'css', 'image', 'copy-files', 'minify');
+gulp.task('build', ['css', 'image', 'copy-files', 'minify']);
