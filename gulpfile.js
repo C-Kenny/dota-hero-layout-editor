@@ -4,6 +4,7 @@ var imagemin = require('gulp-imagemin');
 var uglify = require('gulp-uglify');
 var pump = require('pump');
 var del = require('del');
+var chmod = require('gulp-chmod');
 
 gulp.task('default', ['build']);
 
@@ -53,7 +54,7 @@ gulp.task('clean', function () {
     ], {force: true});
 });
 
-gulp.task('deploy', function () {
+gulp.task('deploy', ['clean'], function () {
     return gulp.src([
             'dist/**/*',
             '!dist/save',
