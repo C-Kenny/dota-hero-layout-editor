@@ -18,6 +18,7 @@
   "homepage": "https://github.com/devilesk/dota-hero-layout-editor#readme",
   "private": true,
   "devDependencies": {
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.0.12",
     "gulp-imagemin": "^3.0.3",

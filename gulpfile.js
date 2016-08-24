@@ -3,6 +3,7 @@ var minifyCSS = require('gulp-clean-css');
 var imagemin = require('gulp-imagemin');
 var uglify = require('gulp-uglify');
 var pump = require('pump');
+var del = require('del');
 
 gulp.task('default', ['build']);
 
@@ -43,3 +44,21 @@ gulp.task('copy-files', function () {
 });
 
 gulp.task('build', ['css', 'image', 'copy-files', 'minify']);
+
+gulp.task('clean', function () {
+    return del([
+        '/srv/www/devilesk.com/dota2/apps/layout-editor/**/*',
+        '!/srv/www/devilesk.com/dota2/apps/layout-editor/save',
+        '!/srv/www/devilesk.com/dota2/apps/layout-editor/save/*'
+    ], {force: true});
+});
+
+gulp.task('deploy', function () {
+    return gulp.src([
+            'dist/**/*',
+            '!dist/save',
+            '!dist/save/*'
+        ])
+        .pipe(chmod(755))
+        .pipe(gulp.dest('/srv/www/devilesk.com/dota2/apps/layout-editor'));
+});
