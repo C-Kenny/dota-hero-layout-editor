@@ -1,0 +1,7 @@
+---
+extends: root.j2
+title: Dota 2 Layout Editor
+description: Dota 2 Layout Editor. Import, create, edit, and export Dota 2 hero selection layouts.
+active_menu: page-webapps
+header: Hero Layout Editor
+---

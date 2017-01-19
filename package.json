@@ -4,7 +4,7 @@
   "description": "Dota 2 Hero Layout Editor",
   "main": "layout-editor.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "render": "python scripts/render.py"
   },
   "repository": {
     "type": "git",
