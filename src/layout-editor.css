@@ -6,14 +6,15 @@ body {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    background-image: url('img/background_16x9.jpg');
     margin: 0;
     padding: 0;
-    background-repeat: no-repeat;
     font-family:Trebuchet MS;
     color: #111111;
 }
-
+#wrapper {
+    background-image: url('img/background_16x9.jpg');
+    background-repeat: no-repeat;
+}
 .ui-state-highlight {
     outline: 3px solid #fed22f;
     border: none;
