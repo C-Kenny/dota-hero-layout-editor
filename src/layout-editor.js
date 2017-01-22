@@ -1092,7 +1092,7 @@ ko.extenders.numeric = function(target, precision) {
 
     var herodata = {};
     
-    $.getJSON('/media/js/herodata.json', function (data) {
+    $.getJSON('/media/dota-json/herodata.json', function (data) {
         for (key in data) {
             var h = data[key];
             herodata[h.HeroID] = h;
