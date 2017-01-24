@@ -5,7 +5,7 @@
   "main": "layout-editor.js",
   "scripts": {
     "render": "python scripts/render.py",
-    "build": "npm run render"
+    "build": "npm run render && cp src/template/index.j2 dist"
   },
   "repository": {
     "type": "git",
